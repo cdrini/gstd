@@ -27,6 +27,25 @@ Graphs are a powerful abstract data type for a wide variety of problem spaces. H
 - ✅ AoC reduce example
 - [ ] State machine example
 
+### Installation
+
+```sh
+npm install gstd
+```
+
+And then in your code:
+
+```js
+import { Graph } from 'gstd';
+```
+
+Or via a CDN:
+
+```html
+<script type="module">
+   import { Graph } from 'https://unpkg.com/gstd?module';
+</script>
+```
 
 ### Creating a graph
 
@@ -35,16 +54,16 @@ Creating a graph is as simple as:
 ```js
 const graph = new Graph({
     edges: [
-        { source: 'A', target: 'B' },
-        { source: 'B', target: 'C' },
-        { source: 'A', target: 'C' },
+        ['A', 'B'],
+        ['B', 'C'],
+        ['A', 'C'],
     ]
 });
 ```
 
 But understanding this graph from the data format above is complicated — so let's view it in a more two dimensional format, using `graph.log()`.
 
-### Logging in a terminal
+### Logging in a terminal (TODO)
 
 In a terminal environment, where images are unsupported, the graph is displayed using ascii art:
 

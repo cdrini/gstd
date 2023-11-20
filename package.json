@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "A standard library for working with node graphs",
   "main": "index.js",
+  "type": "module",
   "files": [
     "index.js"
   ],
