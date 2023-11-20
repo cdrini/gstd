@@ -1,4 +1,23 @@
 {
+  "name": "gstd",
+  "version": "0.0.1",
+  "description": "A standard library for working with node graphs",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "test": "vitest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cdrini/gstd.git"
+  },
+  "author": "Drini Cami <cdrini@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cdrini/gstd/issues"
+  },
   "devDependencies": {
     "vitest": "^0.34.6"
   }
