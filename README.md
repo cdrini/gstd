@@ -13,12 +13,19 @@ Graphs are a powerful abstract data type for a wide variety of problem spaces. H
 
 ### Status
 
-- [x] Creating a graph from nodes/edges
-- [x] `.slice()`
-- [x] `.reduce()`
+- ✅ Creating a graph from nodes and edges
+- ✅ Creating a graph from only edges
+- [ ] `.log()` in terminal
+- [ ] `.log()` in browser console
+- ✅ `.slice()`
+- ✅ `.reduce()`
 - [ ] `.reduceReverse()`
+- ✅ `.reverse()`
+- ✅ `.forEach()` Implementation with no options
 - [ ] `.map()`
-- [ ] `.log()`
+- ✅ Math tree example
+- ✅ AoC reduce example
+- [ ] State machine example
 
 
 ### Creating a graph
@@ -28,9 +35,9 @@ Creating a graph is as simple as:
 ```js
 const graph = new Graph({
     edges: [
-        ['A', 'B'],
-        ['B', 'C'],
-        ['A', 'C'],
+        { source: 'A', target: 'B' },
+        { source: 'B', target: 'C' },
+        { source: 'A', target: 'C' },
     ]
 });
 ```

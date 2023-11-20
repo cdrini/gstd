@@ -86,6 +86,43 @@ const SAMPLE_GRAPHS = {
     },
 };
 
+describe('constructor', () => {
+    test('Supports construction from edges only', () => {
+        const graph = new Graph({
+            edges: [
+                { source: 'A', target: 'B' },
+                { source: 'B', target: 'C' },
+                { source: 'A', target: 'C' },
+            ]
+        });
+        expect(graph.nodes).toEqual([
+            { id: 'A' },
+            { id: 'B' },
+            { id: 'C' },
+        ]);
+    });
+
+    test('Supports construction from edges only in array format', () => {
+        const graph = new Graph({
+            edges: [
+                ['A', 'B'],
+                ['B', 'C'],
+                ['A', 'C'],
+            ]
+        });
+        expect(graph.nodes).toEqual([
+            { id: 'A' },
+            { id: 'B' },
+            { id: 'C' },
+        ]);
+        expect(graph.edges).toEqual([
+            { source: 'A', target: 'B' },
+            { source: 'B', target: 'C' },
+            { source: 'A', target: 'C' },
+        ]);
+    });
+});
+
 test("Can support class-based nodes", () => {
     class Cell {
         constructor(id) {

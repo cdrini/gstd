@@ -8,11 +8,25 @@ export class Graph {
   /**
    * @param {object} args0
    * @param {TNode[]} [args0.nodes]
-   * @param {TEdge[]} [args0.edges]
+   * @param {Array<TEdge | [string|number, string|number, Omit<Omit<TEdge, 'source'>, 'target'>?]>} [args0.edges]
    */
-  constructor({ nodes = undefined, edges = undefined }) {
-    this.nodes = nodes || [];
-    this.edges = edges || [];
+  constructor({ nodes = undefined, edges }) {
+    this.edges = edges.map(e => this._normalizeEdge(e)) || [];
+    /** @type {TNode} */
+    this.nodes = nodes || uniq(this.edges.map(e => [e.source, e.target]).flat())
+      .map(id => ({ id }));
+  }
+
+  /**
+   * @param {TEdge | [string|number, string|number, Omit<Omit<TEdge, 'source'>, 'target'>]} edge
+   * @returns {TEdge}
+   */
+  _normalizeEdge(edge) {
+    if (Array.isArray(edge)) {
+      return { source: edge[0], target: edge[1], ...(edge[2] || {}) };
+    } else {
+      return edge;
+    }
   }
 
   /**
@@ -91,7 +105,7 @@ export class Graph {
    * @param {string | number | TNode | null} start
    * @returns {Generator<{ type: 'node', item: TNode } | { type: 'edge', item: TEdge }>}
    */
-  *traverse(start=null) {
+  *forEach(start=null) {
     /** @type {Set<string|number|TEdge>} */
     const seen = new Set();
     const startNode = start ? this.findNode(start) : null;
@@ -155,7 +169,7 @@ export class Graph {
     /** @type {TEdge[]} */
     const edges = [];
 
-    for (const {type, item} of this.traverse(start)) {
+    for (const {type, item} of this.forEach(start)) {
       if (type == 'node') {
         nodes.push(item);
       } else {
@@ -193,7 +207,7 @@ export class Graph {
     /** @type {TAcc} */
     let lastNodeValue = initial;
 
-    for (const {type, item} of this.traverse()) {
+    for (const {type, item} of this.forEach()) {
       if (type == 'node') {
         const node = item;
         const inputValues = this.getInEdges(node).map((e) => /** @type {TAcc} */(values.get(e)));
@@ -378,4 +392,32 @@ export class Graph {
   //     ticked();
   //     return svg.node();
   // }
+}
+
+/**
+ * @template T
+ * @param {T} item
+ * @returns {T}
+ */
+function IDENTITY_FN(item) { return item; }
+
+/**
+ * @template T
+ * Dedupes the items in `items` by the value returned by `key`.
+ * Stable deduping, so the first item with a given key is kept.
+ * @param {T[]} items 
+ * @param {(item: T) => any} [key]
+ * @returns {T[]}
+ */
+export function uniq(items, key=IDENTITY_FN) {
+  const seen = new Set();
+  const result = [];
+  for (const item of items) {
+    const k = key(item);
+    if (!seen.has(k)) {
+      seen.add(k);
+      result.push(item);
+    }
+  }
+  return result;
 }
