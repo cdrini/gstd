@@ -1,0 +1,74 @@
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   width="100%"
+   height="150"
+   viewBox="0 0 60.868374 70"
+   version="1.1"
+   style="padding: 10px 0;">
+  <defs>
+    <marker
+       style="overflow:visible"
+       id="marker1632"
+       orient="auto">
+      <path
+         transform="scale(0.4)"
+         style="fill:currentColor;stroke:currentColor"
+         d="M 5.77,0 -2.88,5 V -5 Z" />
+    </marker>
+  </defs>
+  <g transform="translate(-37.719544,-55.092062)">
+    <g>
+      <circle
+         style="fill:transparent;stroke:currentColor;stroke-width:1"
+         cx="68.688271"
+         cy="64.946495"
+         r="9.3544331" />
+      <text
+         xml:space="preserve"
+         style="font-size:10.5833px;line-height:1;font-family:sans-serif;fill:currentColor"
+         x="65.21376"
+         y="68.688263"
+        >A</text>
+    </g>
+    <g
+       transform="translate(-1.0690781,4.0090429)">
+      <circle
+         style="fill:transparent;stroke:currentColor;stroke-width:1"
+         cx="48.643055"
+         cy="95.682487"
+         r="9.3544331" />
+      <text
+         xml:space="preserve"
+         style="font-size:10.5833px;line-height:1;font-family:sans-serif;fill:currentColor"
+         x="44.901276"
+         y="99.691528">B</text>
+    </g>
+    <g
+       id="g41"
+       transform="translate(4.0090429,3.6880495)">
+      <circle
+         style="fill:transparent;stroke:currentColor;stroke-width:1"
+         cx="84.724442"
+         cy="105.57146"
+         r="9.3544331" />
+      <text
+         xml:space="preserve"
+         style="font-size:10.5833px;line-height:1;font-family:sans-serif;fill:currentColor"
+         x="80.715385"
+         y="109.31322">C</text>
+    </g>
+    <path
+       style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#marker1632)"
+       d="M 61.471992,71.360963 50.558608,86.789457" />
+    <path
+       style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#marker1632)"
+       d="M 74.300928,72.162772 84.574201,95.651377" />
+    <path
+       style="fill:none;stroke:currentColor;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker1632)"
+       d="m 56.260235,102.49786 19.688568,4.73405" />
+  </g>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0,0,200,82.5" width="400">
+    <style>
+       .node ellipse {
+          fill: none;
+          stroke: currentColor;
+       }
+       .node text {
+          font-size: 0.8em;
+          fill: currentColor;
+          font-family: sans-serif;
+       }
+       .link {
+          fill: none;
+          stroke: currentColor;
+          stroke-width: 1px;
+          marker-end: url(#a);
+       }
+    </style>
+    <defs>
+      <marker style="overflow:visible" id="a" refX="0" refY="0" orient="auto">
+        <path transform="scale(.4)" style="fill:currentColor;stroke:currentColor;stroke-width:1" d="m5.77 0-8.65 5V-5Z"/>
+      </marker>
+    </defs>
+     <g class="main" transform="translate(100,11)">
+         <g class="links">
+             <line class="link" x1="-10" y1="0" x2="-50" y2="20"></line>
+             <line class="link" x1="10" y1="0" x2="50" y2="20"></line>
+             <line class="link" x1="-66" y1="38" x2="-72" y2="47"></line>
+             <line class="link" x1="-54" y1="38" x2="-47" y2="47"></line>
+             <line class="link" x1="54" y1="38" x2="47" y2="47"></line>
+             <line class="link" x1="66" y1="38" x2="72" y2="47"></line>
+         </g>
+         <g class="nodes">
+             <g class="node" data-type="OperatorNode" transform="translate(0,0)">
+                 <ellipse rx="10" ry="10"></ellipse>
+                 <text text-anchor="middle" alignment-baseline="central">-</text>
+             </g>
+             <g class="node" data-type="OperatorNode" transform="translate(-60,30)">
+                 <ellipse rx="10" ry="10"></ellipse>
+                 <text text-anchor="middle" alignment-baseline="central">+</text>
+             </g>
+             <g class="node" data-type="OperatorNode" transform="translate(60,30)">
+                 <ellipse rx="10" ry="10"></ellipse>
+                 <text text-anchor="middle" alignment-baseline="central">*</text>
+             </g>
+             <g class="node" data-type="ConstantNode" transform="translate(-80,60)">
+                 <ellipse rx="10" ry="10"></ellipse>
+                 <text text-anchor="middle" alignment-baseline="central">45</text>
+             </g>
+             <g class="node" data-type="ConstantNode" transform="translate(-40,60)">
+                 <ellipse rx="10" ry="10"></ellipse>
+                 <text text-anchor="middle" alignment-baseline="central">15</text>
+             </g>
+             <g class="node" data-type="ConstantNode" transform="translate(40,60)">
+                 <ellipse rx="10" ry="10"></ellipse>
+                 <text text-anchor="middle" alignment-baseline="central">9</text>
+             </g>
+             <g class="node" data-type="ConstantNode" transform="translate(80,60)">
+                 <ellipse rx="10" ry="10"></ellipse>
+                 <text text-anchor="middle" alignment-baseline="central">2</text>
+             </g>
+         </g>
+     </g>
+ </svg>
+ 

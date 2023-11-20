@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="345.634" height="490.365" viewBox="0 0 140.255 209.294">
+   <defs>
+     <marker style="overflow:visible" id="a" refX="0" refY="0" orient="auto">
+       <path transform="scale(.4)" style="fill:currentColor;stroke:currentColor;stroke-width:1" d="m5.77 0-8.65 5V-5Z"/>
+     </marker>
+   </defs>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="69.522" y="10.321"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">light red</tspan></text>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="27.774" y="74.227"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">bright white</tspan></text>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="108.906" y="74.27"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">muted yellow</tspan></text>
+   <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="M32.122 16.471-5.956 65.957" transform="translate(23.194 -1.69)"/>
+   <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="10.711" y="37.585" transform="translate(23.194 -1.69)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">1</tspan></text>
+   <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="m56.697 15.415 31.448 48.933" transform="translate(28.102 -.634)"/>
+   <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="76.886" y="39.709" transform="translate(28.102 -.634)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">2</tspan></text>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="68.275" y="37.308"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">dark orange</tspan></text>
+   <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="m11.3 13.475 13.242 21.423" transform="translate(62.521 27.683)"/>
+   <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="13.504" y="28.612" transform="translate(62.521 27.683)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">4</tspan></text>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="56.959" y="107.462"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">shiny gold</tspan></text>
+   <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="m51.398 15.105 13 20.477" transform="translate(-8.847 62.224)"/>
+   <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="52.868" y="29.718" transform="translate(-8.847 62.224)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">1</tspan></text>
+   <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="M30.737 22.787 15.458 44.211" transform="translate(27.695 18.47)"/>
+   <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="26.541" y="39.03" transform="translate(27.695 18.47)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">3</tspan></text>
+   <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="M70.906 15.105 57.738 35.582" transform="translate(13.241 62.635)"/>
+   <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="69.087" y="28.864" transform="translate(13.241 62.635)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">2</tspan></text>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="57.829" y="204.905"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">faded blue</tspan></text>
+   <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="M92.553 17.986 37.422 135.71" transform="translate(41.411 60.517)"/>
+   <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="70.814" y="83.264" transform="translate(41.411 60.517)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">9</tspan></text>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="19.847" y="145.615"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">dark olive</tspan></text>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="73.392" y="145.715"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">vibrant plum</tspan></text>
+   <g>
+     <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="m6.644 5.793 10.668 25.995" transform="translate(64.944 104.847)"/>
+     <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="7.94" y="21.28" transform="translate(64.944 104.847)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">2</tspan></text>
+   </g>
+   <g>
+     <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="M38.42 15.105 21.627 41.39" transform="translate(8.915 95.244)"/>
+     <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="36.766" y="30.824" transform="translate(8.915 95.244)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">1</tspan></text>
+   </g>
+   <text xml:space="preserve" style="font-weight:400;font-size:7.96717px;line-height:1;font-family:sans-serif;fill:currentColor" x="53.038" y="175.345"><tspan x="53.038" y="175.345"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">dotted</tspan></tspan><tspan x="53.038" y="183.312"><tspan style="font-weight:400;font-size:7.96717px;font-family:sans-serif;text-align:center;text-anchor:middle">black</tspan></tspan></text>
+   <g>
+     <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="m7.879 3.232-22.235 44.99" transform="translate(80.215 145.485)"/>
+     <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x=".118" y="31.037" transform="translate(80.215 145.485)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">5</tspan></text>
+   </g>
+   <g>
+     <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="M14.458 5.789 5.582 22.385" transform="translate(55.48 142.927)"/>
+     <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="14.63" y="15.672" transform="translate(55.48 142.927)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">6</tspan></text>
+   </g>
+   <g>
+     <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="m-8.285 10.091 25.808 44.991" transform="translate(22.215 138.625)"/>
+     <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="2.485" y="43.376" transform="translate(22.215 138.625)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">3</tspan></text>
+   </g>
+   <g>
+     <path style="fill:none;stroke:currentColor;stroke-width:1;marker-end:url(#a)" d="m4.576 5.789 8.877 16.596" transform="translate(32.956 142.927)"/>
+     <text xml:space="preserve" style="font-weight:400;font-size:6.829px;line-height:1;font-family:sans-serif;fill:currentColor" x="4.386" y="18.233" transform="translate(32.956 142.927)"><tspan style="font-weight:400;font-size:6.829px;font-family:sans-serif;text-align:center;text-anchor:middle">4</tspan></text>
+   </g>
+ </svg>
+ 
