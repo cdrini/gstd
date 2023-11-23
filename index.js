@@ -12,7 +12,7 @@ export class Graph {
    */
   constructor({ nodes = undefined, edges }) {
     this.edges = edges.map(e => this._normalizeEdge(e)) || [];
-    /** @type {TNode} */
+    /** @type {TNode[]} */
     this.nodes = nodes || uniq(this.edges.map(e => [e.source, e.target]).flat())
       .map(id => ({ id }));
   }
@@ -264,7 +264,7 @@ export class Graph {
   // /**
   //  * @returns {Promise<SVGElement>}
   //  */
-  // async svg(width = 300, height = 300) {
+  // async _force_svg({width = 300, height = 300} = {}) {
   //     if (!window.d3) await import('https://unpkg.com/d3@6.2');
   //     let node, link, edgepaths, edgelabels;
 
@@ -274,6 +274,8 @@ export class Graph {
   //         .attr('version', '1.1')
   //         .attr('width', width)
   //         .attr('height', height);
+      
+  //     document.body.appendChild(svg.node());
 
   //     svg.append('defs')
   //         .append('marker')
@@ -286,7 +288,7 @@ export class Graph {
   //             .attr('markerHeight', 13)
   //         .append('svg:path')
   //         .attr('d', 'M 0,-5 L 10 ,0 L 0,5')
-  //         .attr('fill', '#999')
+  //         .attr('fill', 'black')
   //         .style('stroke','none');
 
   //     const simulation = d3.forceSimulation()
@@ -384,6 +386,7 @@ export class Graph {
   //         });
   //     }
 
+  //     // Make a copy of the edges, because we store data on them
   //     update(this.edges.map(e => ({ source: e.source, target: e.target })), this.nodes);
   //     // See https://github.com/d3/d3-force/blob/master/README.md#simulation_tick
   //     for (let i = 0, n = Math.ceil(Math.log(simulation.alphaMin()) / Math.log(1 - simulation.alphaDecay())); i < n; ++i) {
@@ -392,6 +395,202 @@ export class Graph {
   //     ticked();
   //     return svg.node();
   // }
+
+  /**
+   * @returns {Promise<SVGElement>}
+   */
+  async svg({nodeLabel=null} = {}) {
+    if (!window.d3) await import('https://unpkg.com/d3@6.2');
+
+    const hasShortNodeLabels = this.nodes
+      .slice(0, 5)
+      .every(n => (nodeLabel ? n[nodeLabel] : n.id).toString().length < 3);
+
+    const svg = d3.create("svg")
+      .attr('xmlns', 'http://www.w3.org/2000/svg')
+      .attr('version', '1.1');
+
+    const rendered = svg.node();
+    document.body.appendChild(rendered);
+
+    svg.append('defs')
+      .append('marker')
+        .attr('id', 'arrowhead')
+        .attr('viewBox', '-0 -5 10 10')
+        .attr('refX', 8)
+        .attr('refY', 0)
+        .attr('orient', 'auto')
+        .attr('markerWidth', 10)
+        .attr('markerHeight', 10)
+      .append('svg:path')
+      .attr('d', 'M 0,-5 L 10,0 L 0,5')
+      .attr('fill', 'black')
+      .style('stroke','none');
+
+    const link = svg.selectAll(".link")
+      .data(this.edges)
+      .enter()
+      .append("line")
+      .attr("class", "link")
+      .attr('marker-end','url(#arrowhead)')
+
+    // link.append("title")
+    //     .text(d => 'weight' in d ? d.weight : d.id);
+
+    // Q: What are the transparent edge paths for if we're using <line> above?
+    // A: They're for displaying the edge labels. But then why not use
+    // these instead of link altogether?
+    const edgepaths = svg.selectAll(".edgepath")
+      .data(this.edges)
+      .enter()
+      .append('path')
+        .attr('class', 'edgepath')
+        .attr('fill-opacity', 0)
+        .attr('stroke-opacity', 0)
+        .attr('id', (d, i) => `edgepath${i}`)
+      .style("pointer-events", "none");
+
+    const edgelabels = svg.selectAll(".edgelabel")
+      .data(this.edges)
+      .enter()
+      .append('text')
+      .style("pointer-events", "none")
+        .attr('class', 'edgelabel')
+        .attr('id', (d, i) => `edgelabel${i}`)
+        .attr('font-size', 10)
+        .attr('fill', 'black');
+
+    edgelabels.append('textPath')
+      .attr('href', (d, i) => `#edgepath${i}`)
+      .style("text-anchor", "middle")
+      .style("pointer-events", "none")
+      .style("font-family", "system-ui,sans-serif")
+      .attr("startOffset", "50%")
+      .text(d => (
+        'weight' in d ? d.weight :
+        'id' in d ? d.id :
+        Object.keys(d).filter(k => !['source', 'target'].includes(k)).map(k => d[k])[0] || ''
+      ));
+
+    const node = svg.selectAll(".node")
+      .data(this.nodes)
+      .enter()
+      .append("g")
+      .attr("class", "node");
+
+    if (hasShortNodeLabels) {
+      node.append("circle")
+        .attr("r", 20)
+        .style("stroke", "black")
+        .style("fill", "transparent");
+    }
+
+    node.append("text")
+      .attr("text-anchor", "middle")
+      .style("font-family", "system-ui,sans-serif")
+      .attr("dominant-baseline", "central")
+      .text(d => nodeLabel ? d[nodeLabel] : d.id);
+
+    // Render each node in a 'row', where the row is the
+    // distance from an 'input' node -- where an 'input' node is
+    // a node with no incoming edges.
+    /** @type {Map<string|number, number>} */
+    const nodeIdToRow = new Map();
+    const rows = [];
+    for (const {type, item: node} of this.forEach()) {
+      if (type == 'edge') continue;
+
+      const inEdges = this.getInEdges(node);
+      let row = 0;
+      if (inEdges.length == 0 || inEdges.every(e => !nodeIdToRow.has(e.source))) {
+        row = 0;
+      } else {
+        row = Math.max(...inEdges
+          .filter(e => nodeIdToRow.has(e.source))
+          .map(e => /** @type {number} */(nodeIdToRow.get(e.source)))
+        ) + 1;
+      }
+
+      nodeIdToRow.set(this.getNodeId(node), row);
+      rows[row] = (rows[row] || []).concat(node);
+    }
+
+    const gridWidth = 100;
+    const gridHeight = 100;
+    const totalWidth = Math.max(...rows.map(r => r.length)) * gridWidth;
+    const totalHeight = (Math.max(...nodeIdToRow.values()) + 1) * gridHeight;
+    
+    svg
+      .attr("viewBox", [0, 0, totalWidth, totalHeight])
+      .attr('width', totalWidth)
+      .attr('height', totalHeight);
+
+    const nodeToPos = new Map();
+
+    node.attr('transform', function(d) {
+      const rowNum = /** @type {number} */(nodeIdToRow.get(d.id));
+      const row = rows[rowNum];
+      const cellWidth = totalWidth / row.length;
+      const col = row.indexOf(d);
+      const xPos = col * cellWidth + cellWidth / 2;
+      const yPos = rowNum * gridHeight + gridHeight / 2;
+      nodeToPos.set(d.id, {x: xPos, y: yPos});
+      return `translate(${xPos}, ${yPos})`;
+    });
+
+    const linkPadding = 20;
+
+    const edgeToPos = new WeakMap();
+
+    link
+      .attr('stroke', 'black')
+      .each(function(d) {
+        const source = nodeToPos.get(d.source);
+        const target = nodeToPos.get(d.target);
+        const xDist = target.x - source.x;
+        const yDist = target.y - source.y;
+        const hyp = Math.sqrt(xDist ** 2 + yDist ** 2);
+        const linkPaddingRatio = linkPadding / hyp;
+        const pos = {
+          x1: source.x + linkPaddingRatio * xDist,
+          y1: source.y + linkPaddingRatio * yDist,
+          x2: target.x - linkPaddingRatio * xDist,
+          y2: target.y - linkPaddingRatio * yDist,
+        };
+        if (!hasShortNodeLabels) {
+          pos.y1 = source.y + linkPadding *.75;
+          pos.y2 = target.y - linkPadding *.75;
+        }
+        edgeToPos.set(d, pos);
+        d3.select(this)
+          .attr("x1", pos.x1)
+          .attr("y1", pos.y1)
+          .attr("x2", pos.x2)
+          .attr("y2", pos.y2);
+      })
+
+    edgepaths.attr('d', d => {
+      const pos = edgeToPos.get(d);
+      return `M ${pos.x1} ${pos.y1} L ${pos.x2} ${pos.y2}`;
+    });
+
+    // edgelabels.attr('transform', function (d) {
+    //   const source = nodeToPos.get(d.source);
+    //   const target = nodeToPos.get(d.target);
+    //   if (target.x < source.x) {
+    //       const bbox = this.getBBox();
+    //       const rx = bbox.x + bbox.width / 2;
+    //       const ry = bbox.y + bbox.height / 2;
+    //       return `rotate(180 ${rx} ${ry})`;
+    //   }
+    //   else {
+    //       return 'rotate(0)';
+    //   }
+    // });
+
+    document.body.removeChild(rendered);
+    return rendered;
+  }
 }
 
 /**

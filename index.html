@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gstd Example SVGs</title>
+
+    <style>
+        svg {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <script type="module">
+        import { Graph } from './index.js';
+        import SAMPLE_GRAPHS from './tests/sample-graphs.js';
+        const graph = new Graph({
+            edges: [
+                ['A', 'B'],
+                ['B', 'C', {weight: 'hello'}],
+                ['B', 'D'],
+            ]
+        });
+        console.log(graph);
+        window.graph = graph;
+        document.body.appendChild(await graph.svg());
+        for (const [name, graph] of Object.entries(SAMPLE_GRAPHS)) {
+            const opts = {};
+            // if (name != 'TwoNodeCycle') continue;
+            if (name === 'ReadmeMathExample') {
+                opts.nodeLabel = 'value';
+            }
+            const heading = document.createElement('h3');
+            heading.textContent = name;
+            document.body.appendChild(heading);
+            document.body.appendChild(await (new Graph(graph)).svg(opts));
+        }
+    </script>
+</body>
+</html>
