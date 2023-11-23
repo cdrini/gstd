@@ -407,12 +407,53 @@ export class Graph {
       .slice(0, 5)
       .every(n => (nodeLabel ? n[nodeLabel] : n.id).toString().length < 3);
 
+    const uuid = 'gstd-' + Math.random().toString(36).substring(2) + Date.now().toString(36);
     const svg = d3.create("svg")
       .attr('xmlns', 'http://www.w3.org/2000/svg')
-      .attr('version', '1.1');
+      .attr('version', '1.1')
+      .attr('id', uuid)
 
     const rendered = svg.node();
     document.body.appendChild(rendered);
+
+    // Need to limit to uuid to avoid style leaking
+    const styleTag = document.createElement('style');
+    styleTag.innerHTML = `
+      #${uuid} line {
+        stroke: currentColor;
+        marker-end: url(#arrowhead);
+      }
+      #${uuid} .edgepath {
+        fill-opacity: 0;
+        stroke-opacity: 0;
+        pointer-events: none;
+      }
+
+      #${uuid} .edgelabel {
+        pointer-events: none;
+        font-size: 10px;
+        fill: currentColor;
+      }
+
+      #${uuid} textPath {
+        text-anchor: middle;
+        pointer-events: none;
+        font-family: system-ui,sans-serif;
+      }
+
+      #${uuid} .node circle {
+        stroke: currentColor;
+        fill: transparent;
+      }
+
+      #${uuid} .node text {
+        fill: currentColor;
+        text-anchor: middle;
+        font-family: system-ui,sans-serif;
+        dominant-baseline: central;
+      }
+    `;
+    rendered.appendChild(styleTag);
 
     svg.append('defs')
       .append('marker')
@@ -425,18 +466,13 @@ export class Graph {
         .attr('markerHeight', 10)
       .append('svg:path')
       .attr('d', 'M 0,-5 L 10,0 L 0,5')
-      .attr('fill', 'black')
+      .attr('fill', 'currentColor')
       .style('stroke','none');
 
     const link = svg.selectAll(".link")
       .data(this.edges)
       .enter()
-      .append("line")
-      .attr("class", "link")
-      .attr('marker-end','url(#arrowhead)')
-
-    // link.append("title")
-    //     .text(d => 'weight' in d ? d.weight : d.id);
+        .append("line");
 
     // Q: What are the transparent edge paths for if we're using <line> above?
     // A: They're for displaying the edge labels. But then why not use
@@ -446,26 +482,17 @@ export class Graph {
       .enter()
       .append('path')
         .attr('class', 'edgepath')
-        .attr('fill-opacity', 0)
-        .attr('stroke-opacity', 0)
-        .attr('id', (d, i) => `edgepath${i}`)
-      .style("pointer-events", "none");
+        .attr('id', (d, i) => `edgepath${i}`);
 
     const edgelabels = svg.selectAll(".edgelabel")
       .data(this.edges)
       .enter()
       .append('text')
-      .style("pointer-events", "none")
         .attr('class', 'edgelabel')
-        .attr('id', (d, i) => `edgelabel${i}`)
-        .attr('font-size', 10)
-        .attr('fill', 'black');
+        .attr('id', (d, i) => `edgelabel${i}`);
 
     edgelabels.append('textPath')
       .attr('href', (d, i) => `#edgepath${i}`)
-      .style("text-anchor", "middle")
-      .style("pointer-events", "none")
-      .style("font-family", "system-ui,sans-serif")
       .attr("startOffset", "50%")
       .text(d => (
         'weight' in d ? d.weight :
@@ -481,15 +508,10 @@ export class Graph {
 
     if (hasShortNodeLabels) {
       node.append("circle")
-        .attr("r", 20)
-        .style("stroke", "black")
-        .style("fill", "transparent");
+        .attr("r", 20);
     }
 
     node.append("text")
-      .attr("text-anchor", "middle")
-      .style("font-family", "system-ui,sans-serif")
-      .attr("dominant-baseline", "central")
       .text(d => nodeLabel ? d[nodeLabel] : d.id);
 
     // Render each node in a 'row', where the row is the
@@ -544,7 +566,6 @@ export class Graph {
     const edgeToPos = new WeakMap();
 
     link
-      .attr('stroke', 'black')
       .each(function(d) {
         const source = nodeToPos.get(d.source);
         const target = nodeToPos.get(d.target);
