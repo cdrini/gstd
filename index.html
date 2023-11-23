@@ -34,7 +34,10 @@
             const heading = document.createElement('h3');
             heading.textContent = name;
             document.body.appendChild(heading);
-            document.body.appendChild(await (new Graph(graph)).svg(opts));
+            const g = new Graph(graph);
+            console.log(name);
+            g.log(opts);
+            document.body.appendChild(await (g).svg(opts));
         }
     </script>
 </body>

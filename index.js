@@ -235,31 +235,32 @@ export class Graph {
     }
   }
 
-  // async log() {
-  //   const svg = await this.svg();
-  //   const width = parseFloat(svg.getAttribute("width"));
-  //   const height = parseFloat(svg.getAttribute("height"));
+  async log(opts) {
+    const svg = await this.svg(opts);
+    const width = parseFloat(svg.getAttribute("width"));
+    const height = parseFloat(svg.getAttribute("height"));
 
-  //   const style = [
-  //     // Hacky way of forcing image's viewport using `font-size` and `line-height`
-  //     "font-size: 1px;",
-  //     `line-height: ${height}px;`,
+    const style = [
+      // Hacky way of forcing image's viewport using `font-size` and `line-height`
+      `font-size: ${height}px;`,
+      `line-height: ${height}px;`,
 
-  //     // Hacky way of forcing a middle/center anchor point for the image
-  //     `padding: ${height / 2}px ${width / 2}px;`,
+      // Hacky way of forcing a middle/center anchor point for the image
+      `padding: 0px ${width / 2}px;`,
 
-  //     // Set image dimensions
-  //     `background-size: ${width}px ${height}px;`,
+      // Set image dimensions
+      `background-size: ${width}px ${height}px;`,
 
-  //     // Set image URL
-  //     `background: url('data:image/svg+xml;utf8,${
-  //       encodeURIComponent(svg.outerHTML)
-  //     }');`,
-  //   ].join(" ");
+      // Set image URL
+      `background: url('data:image/svg+xml;base64,${
+        btoa(svg.outerHTML)
+      }');`,
+      `background-repeat: no-repeat;`,
+    ].join(" ");
 
-  //   // notice the space after %c
-  //   console.log("%c ", style);
-  // }
+    // note the space after %c
+    console.log("%c ", style);
+  }
 
   // /**
   //  * @returns {Promise<SVGElement>}
