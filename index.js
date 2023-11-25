@@ -419,14 +419,9 @@ export class Graph {
     // Need to limit to uuid to avoid style leaking
     const styleTag = document.createElement('style');
     styleTag.innerHTML = `
-      #${uuid} line {
+      #${uuid} .edgepath {
         stroke: currentColor;
         marker-end: url(#arrowhead);
-      }
-      #${uuid} .edgepath {
-        fill-opacity: 0;
-        stroke-opacity: 0;
-        pointer-events: none;
       }
 
       #${uuid} .edgelabel {
@@ -469,14 +464,6 @@ export class Graph {
       .attr('fill', 'currentColor')
       .style('stroke','none');
 
-    const link = svg.selectAll(".link")
-      .data(this.edges)
-      .enter()
-        .append("line");
-
-    // Q: What are the transparent edge paths for if we're using <line> above?
-    // A: They're for displaying the edge labels. But then why not use
-    // these instead of link altogether?
     const edgepaths = svg.selectAll(".edgepath")
       .data(this.edges)
       .enter()
@@ -562,11 +549,8 @@ export class Graph {
     });
 
     const linkPadding = 20;
-
-    const edgeToPos = new WeakMap();
-
-    link
-      .each(function(d) {
+    edgepaths
+      .attr('d', function(d) {
         const source = nodeToPos.get(d.source);
         const target = nodeToPos.get(d.target);
         const xDist = target.x - source.x;
@@ -583,19 +567,9 @@ export class Graph {
           pos.y1 = source.y + linkPadding *.75;
           pos.y2 = target.y - linkPadding *.75;
         }
-        edgeToPos.set(d, pos);
-        d3.select(this)
-          .attr("x1", pos.x1)
-          .attr("y1", pos.y1)
-          .attr("x2", pos.x2)
-          .attr("y2", pos.y2);
-      })
 
-    edgepaths.attr('d', d => {
-      const pos = edgeToPos.get(d);
-      return `M ${pos.x1} ${pos.y1} L ${pos.x2} ${pos.y2}`;
-    });
-
+        return `M ${pos.x1} ${pos.y1} L ${pos.x2} ${pos.y2}`;
+      });
     // edgelabels.attr('transform', function (d) {
     //   const source = nodeToPos.get(d.source);
     //   const target = nodeToPos.get(d.target);
