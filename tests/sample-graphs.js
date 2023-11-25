@@ -3,6 +3,11 @@ export default {
         nodes: [],
         edges: [],
     },
+    OneNodeCycle: {
+        edges: [
+            [1, 1, {label: 'loop'}],
+        ],
+    },
     TwoNodeCycle: {
         edges: [
             [1, 2],
@@ -20,6 +25,7 @@ export default {
             [4, 7],
             [4, 8],
             [4, 9],
+            [4, 4],
         ],
     },
     RadialGraph: {
@@ -60,6 +66,14 @@ export default {
             [1, 2],
             [2, 3],
             [3, 1],
+        ],
+    },
+    FourNodeCycle: {
+        edges: [
+            [1, 2],
+            [2, 3],
+            [3, 4],
+            [4, 1],
         ],
     },
     ReadmeMathExample: {

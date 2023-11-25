@@ -422,17 +422,16 @@ export class Graph {
       #${uuid} .edgepath {
         stroke: currentColor;
         marker-end: url(#arrowhead);
+        fill: none;
       }
 
       #${uuid} .edgelabel {
-        pointer-events: none;
         font-size: 10px;
         fill: currentColor;
       }
 
       #${uuid} textPath {
         text-anchor: middle;
-        pointer-events: none;
         font-family: system-ui,sans-serif;
       }
 
@@ -469,23 +468,24 @@ export class Graph {
       .enter()
       .append('path')
         .attr('class', 'edgepath')
-        .attr('id', (d, i) => `edgepath${i}`);
+        .attr('id', (d, i) => `${uuid}-edgepath${i}`);
 
     const edgelabels = svg.selectAll(".edgelabel")
       .data(this.edges)
       .enter()
       .append('text')
-        .attr('class', 'edgelabel')
-        .attr('id', (d, i) => `edgelabel${i}`);
+        .attr('class', 'edgelabel');
 
     edgelabels.append('textPath')
-      .attr('href', (d, i) => `#edgepath${i}`)
-      .attr("startOffset", "50%")
-      .text(d => (
-        'weight' in d ? d.weight :
-        'id' in d ? d.id :
-        Object.keys(d).filter(k => !['source', 'target'].includes(k)).map(k => d[k])[0] || ''
-      ));
+      .attr('href', (d, i) => `#${uuid}-edgepath${i}`)
+      .attr("startOffset", "33%")
+      .append("tspan")
+        .attr("dy", -3)
+        .text(d => (
+          'weight' in d ? d.weight :
+          'id' in d ? d.id :
+          Object.keys(d).filter(k => !['source', 'target'].includes(k)).map(k => d[k])[0] || ''
+        ));
 
     const node = svg.selectAll(".node")
       .data(this.nodes)
@@ -553,6 +553,14 @@ export class Graph {
       .attr('d', function(d) {
         const source = nodeToPos.get(d.source);
         const target = nodeToPos.get(d.target);
+        if (d.source == d.target) {
+          // one node cycle; display a circular arc pointing back to itself
+          // starting at the bottom of the node, then going ccw
+          const nodeBottom = {x: source.x, y: source.y + linkPadding};
+          const nodeRight = {x: source.x + linkPadding, y: source.y};
+
+          return `M ${nodeBottom.x} ${nodeBottom.y} A ${linkPadding*.9} ${linkPadding*.9} 0 1 0 ${nodeRight.x} ${nodeRight.y}`;
+        }
         const xDist = target.x - source.x;
         const yDist = target.y - source.y;
         const hyp = Math.sqrt(xDist ** 2 + yDist ** 2);
