@@ -16,7 +16,7 @@ Graphs are a powerful abstract data type for a wide variety of problem spaces. H
 - ✅ Creating a graph from nodes and edges
 - ✅ Creating a graph from only edges
 - [ ] `.log()` in terminal
-- [ ] `.log()` in browser console
+- ✅ `.log()` in browser console
 - ✅ `.slice()`
 - ✅ `.reduce()`
 - [ ] `.reduceReverse()`
